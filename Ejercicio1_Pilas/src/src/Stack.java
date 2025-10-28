@@ -1,4 +1,4 @@
-package ejercicio_pilas;
+package src;
 
 public interface Stack<T> {
     void push(T element);
