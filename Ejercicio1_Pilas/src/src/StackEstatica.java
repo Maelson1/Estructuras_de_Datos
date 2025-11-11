@@ -58,6 +58,7 @@ public abstract class StackEstatica  {
         return t + 1;
 
     }
+		//hecho con chatgpt ni idea de como va esto
     public String toString() {
         StringBuilder sb = new StringBuilder("[");
         for (int i = 0; i < N; i++) {
