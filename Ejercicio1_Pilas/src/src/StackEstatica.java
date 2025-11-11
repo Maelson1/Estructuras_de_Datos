@@ -2,17 +2,17 @@ package src;
 
 import exceptions.FullArrayException;
 
-public abstract class StackEstatica  {
+public abstract class StackEstatica<T> implements Stack<T>   {
 
 
-	public class ArrayStack<T> implements Stack<T> {
+	 
 	    private T[] stack;  
 	    private int N;      
 	    private int t;      
 
 	   
 	   
-		public ArrayStack(int capacity) {
+		public void ArrayStack(int capacity) {
 	        N = capacity;
 	        stack = (T[]) new Object[N]; 
 	        t = -1; 
@@ -58,7 +58,6 @@ public abstract class StackEstatica  {
         return t + 1;
 
     }
-		//hecho con chatgpt ni idea de como va esto
     public String toString() {
         StringBuilder sb = new StringBuilder("[");
         for (int i = 0; i < N; i++) {
@@ -69,6 +68,6 @@ public abstract class StackEstatica  {
         return sb.toString();
     }
 
-}
+
 
 }
