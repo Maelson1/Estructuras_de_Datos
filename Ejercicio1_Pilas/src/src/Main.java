@@ -1,66 +1,44 @@
-package ejercicio_pilas;
+package Ejercicio1;
 
 import java.util.Scanner;
-import java.util.ArrayList;
+
 public class Main {
+	public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);
 
-    static class Stack<T> {
-        private ArrayList<T> pila = new ArrayList<>();
+	    System.out.print("Introduce un número en base decimal: ");
+	    int numero = sc.nextInt();
 
-        public void push(T element) {
-            pila.add(element);
-        }
+	    System.out.print("Introduce la base a la que deseas convertir (menor que 10): ");
+	    int base = sc.nextInt();
 
-        public T pop() throws Exception {
-            if (isEmpty()) {
-                throw new Exception("La pila está vacía");
-            }
-            return pila.remove(pila.size() - 1);
-        }
+	    System.out.print("¿Deseas usar pila estática (1) o dinámica (2)? ");
+	    int tipo = sc.nextInt();
 
-        public boolean isEmpty() {
-            return pila.isEmpty();
-        }
-    }
-    public static String convertirBase(String decimalStr, int base) throws Exception {
-        int numero = Integer.parseInt(decimalStr);
+	    Stack<Integer> pila = null;
 
-        if (base < 2 || base > 9) {
-            throw new Exception("La base debe estar entre 2 y 9");
-        }
+	    switch (tipo) {
 
-        if (numero == 0) return "0";
+	        case 1:
+	            pila = new StackEstatica<>(100);   
+	            break;
 
-        Stack<Integer> pila = new Stack<>();
-        while (numero > 0) {
-            pila.push(numero % base);
-            numero /= base;
-        }
+	        case 2:
+	            pila = new StackDinamica<>();      
+	            break;
 
-       
-        StringBuilder resultado = new StringBuilder();
-        while (!pila.isEmpty()) {
-            resultado.append(pila.pop());
-        }
+	        default:
+	            System.out.println("Opción no válida. Usando pila dinámica por defecto.");
+	            pila = new StackDinamica<>();
+	            break;
+	    }
 
-        return resultado.toString();
-    }
+	    String resultado = CambioDeBase.convertirBase(numero, base, pila);
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Introduce un número decimal: ");
-        String numero = sc.nextLine();
-
-        System.out.print("Introduce la base (2-9): ");
-        int base = sc.nextInt();
-
-        try {
-            String convertido = convertirBase(numero, base);
-            System.out.println("Número convertido a base " + base + ": " + convertido);
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+        System.out.println("Número convertido a base " + base + ": " + resultado);
 
         sc.close();
     }
+
+
 }
