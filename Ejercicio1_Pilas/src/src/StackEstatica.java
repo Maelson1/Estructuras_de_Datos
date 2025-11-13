@@ -1,6 +1,8 @@
 package Ejercicio1;
 
-import exceptions.FullArrayException;
+import exceptions.EmptyStackException;
+import exceptions.FullStackException;
+import exceptions.FullStackException;
 
 public class StackEstatica<T> implements Stack<T>   {
 
@@ -19,21 +21,21 @@ public class StackEstatica<T> implements Stack<T>   {
 	    }
 
         @Override
-		public void push(T value) throws FullArrayException {
+		public void push(T value) throws FullStackException {
             if (t == N-1) {
 
-                System.out.println("Error: la pila está llena.");
-                return;
+                throw new FullStackException();
+                
             }
             stack[++t] = value;
         }
 
 
     @Override
-	public T pop() {
+	public T pop()throws EmptyStackException {
         if(isEmpty()) {
-            System.out.println("Error: la pila está vacía");
-            return null;
+            throw new EmptyStackException();
+            
         }
         else {
         return stack[t--];
@@ -42,10 +44,9 @@ public class StackEstatica<T> implements Stack<T>   {
     }
 
     @Override
-	public T top() {
+	public T top() throws EmptyStackException{
         if (isEmpty()) {
-            System.out.println("Error: la pila está vacía");
-            return null;
+           throw new EmptyStackException();
         } else {
             return stack[t];
         }
@@ -64,17 +65,20 @@ public class StackEstatica<T> implements Stack<T>   {
 
     }
     @Override
-	public String toString() {
-        StringBuilder sb = new StringBuilder("[");
-        for (int i = 0; i < N; i++) {
-            sb.append(stack[i]);
-            if (i < N - 1) {
-				sb.append(", ");
-			}
+    public String toString() {
+        String resultado = "[";
+
+        for (int i = 0; i <= t; i++) {
+            resultado = resultado + stack[i];
+            if (i < t) {
+                resultado = resultado + ", ";
+            }
         }
-        sb.append("]");
-        return sb.toString();
+
+        resultado = resultado + "]";
+        return resultado;
     }
+
 
 
 
