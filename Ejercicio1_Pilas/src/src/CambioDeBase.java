@@ -16,12 +16,11 @@ public class CambioDeBase {
 	        numero /= base;
 	    }
 
-	    StringBuilder resultado = new StringBuilder();
+	  String resultado = "";
+        while (!pila.isEmpty()) {
+            resultado = resultado + pila.pop();  
+        }
 
-	    while (!pila.isEmpty()) {
-	        resultado.append(pila.pop());
-	    }
-
-	    return resultado.toString();
-	}
+        return resultado;
+    }
 }
