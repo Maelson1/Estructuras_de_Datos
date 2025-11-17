@@ -12,6 +12,7 @@ public class QueueDinamica<T> implements Queue<T> {
 		size = 0;
 	
 	}
+	@Override
 	public int size() {
 		return size;
 	}
