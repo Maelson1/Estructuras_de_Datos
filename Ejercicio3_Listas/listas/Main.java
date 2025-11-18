@@ -56,6 +56,15 @@ public class Main {
                     case 5:
                         System.out.println(dicc);
                         break;
+                         case 6:
+                    	System.out.println("Término a modificar: ");
+                    	String tModificar = sc.nextLine();
+                    	System.out.println("Nueva definición: ");
+                    	String nuevaDef = sc.nextLine();
+                    	dicc.remove (tModificar);
+                    	dicc.add(new Entrada(tModificar, nuevaDef));
+                    	break;
+                    	
 
                     case 0:
                         System.out.println("Saliendo");
@@ -74,3 +83,4 @@ public class Main {
         sc.close();
     }
 }
+
