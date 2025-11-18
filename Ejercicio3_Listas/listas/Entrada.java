@@ -7,13 +7,16 @@ import exceptions.TerminoVacio;
  *
  * Cada entrada puede compararse con otra mediante su término,
  * y dos entradas se consideran iguales si sus términos coinciden.
- *
+ * @author Pablo
+ * @since 2025-11-18
+ * @version 1.0
  */
 
 public class Entrada implements Comparable<Entrada> {
 
 	    private String termino;
 	    private String definicion;
+	    private int contador = 0;
 	    /**
 	     * Crea una nueva entrada de diccionario.
 	     *
@@ -22,7 +25,7 @@ public class Entrada implements Comparable<Entrada> {
 	     * @throws TerminoVacio si el término enviado que se desea definir es nulo o vacio
 	     */
 
-	    public Entrada(String termino, String definicion) throws TerminoVacio {
+	    public Entrada(String termino, String definicion, int contador) throws TerminoVacio {
 	        if (termino == null || termino.isEmpty())
 	            throw new TerminoVacio();
 	        if (definicion == null)
@@ -30,6 +33,7 @@ public class Entrada implements Comparable<Entrada> {
 
 	        this.termino = termino;
 	        this.definicion = definicion;
+	        this.contador= contador;
 	    }
 	    /**
 	     * Devuelve el término que define esta entrada.
@@ -50,13 +54,18 @@ public class Entrada implements Comparable<Entrada> {
 	        return definicion;
 	    }
 	    
+	    
+	    public int getContador() {
+	    	return contador;
+	    }
+	    
 	    /**
 	     * Establece una nueva definición para el término.
 	     *
 	     * @param definicion la nueva definición del término
 	     */
 	    
-
+	    
 	    public void setDefinicion(String definicion) {
 	        this.definicion = definicion;
 	    }
