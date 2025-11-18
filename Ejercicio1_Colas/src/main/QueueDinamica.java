@@ -16,17 +16,7 @@ public class QueueDinamica<T> implements Queue<T> {
 	public int size() {
 		return size;
 	}
-	@Override
-	public T dequeue() {
-		if(isEmpty()) {
-			throw new EmptyQueueException();
-		} 
-		
-		T dato = frente.getElemento();
-		frente = frente.getNext();
-		return dato;
-		
-	}
+	
 	@Override
 	public boolean isEmpty() {
 		return frente == null;
@@ -35,8 +25,32 @@ public class QueueDinamica<T> implements Queue<T> {
 	@Override
 	public void enqueue(T dato) {
 		Node<T> aux = new Node<>(dato, null);
+		
+		if(isEmpty()) {
+			frente = aux;
+		} else {
+			fin.setNext(aux);
+		}
+		
 		fin = aux;
 		size++;
+	}
+	
+	@Override
+	public T dequeue() {
+		if(isEmpty()) {
+			throw new EmptyQueueException();
+		} 
+		
+		T dato = frente.getElemento();
+		frente = frente.getNext();
+		
+		if(frente == null) {
+			fin = null;
+		}
+		size--;
+		return dato;
+		
 	}
 	
 	@Override
