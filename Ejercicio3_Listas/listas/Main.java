@@ -10,6 +10,7 @@ public class Main {
         Diccionario dicc = new Diccionario();
 
         int opcion;
+        int contadorGlobal = 0 ;
 
         do {
             System.out.println("MENÚ DICCIONARIO");
@@ -18,6 +19,8 @@ public class Main {
             System.out.println("3. Buscar definición");
             System.out.println("4. Número de términos");
             System.out.println("5. Mostrar diccionario");
+            System.out.println("6. Modificar definición");
+            System.out.println("7. Ver frecuencia de cada término");
             System.out.println("0. Salir");
             System.out.print("Elige opción: ");
 
@@ -31,8 +34,10 @@ public class Main {
                         String term = sc.nextLine();
                         System.out.print("Definición: ");
                         String def = sc.nextLine();
-                        dicc.add(new Entrada(term, def));
+                        int cont = 0;
+                        dicc.add(new Entrada(term, def,cont));
                         System.out.println(" Termino añadido");
+                        
                         break;
 
                     case 2:
@@ -47,6 +52,10 @@ public class Main {
                         String tBuscar = sc.nextLine();
                         Entrada e = dicc.get(tBuscar);
                         System.out.println("Definición: " + e.getDefinicion());
+                        int conta = 0;
+                        conta=e.getContador()+1;
+                     	dicc.add(new Entrada(tBuscar,e.getDefinicion(),conta));
+                        contadorGlobal++;
                         break;
 
                     case 4:
@@ -56,15 +65,28 @@ public class Main {
                     case 5:
                         System.out.println(dicc);
                         break;
-                         case 6:
+                       
+                    case 6:
                     	System.out.println("Término a modificar: ");
                     	String tModificar = sc.nextLine();
+                    	Entrada g = dicc.get(tModificar);
                     	System.out.println("Nueva definición: ");
                     	String nuevaDef = sc.nextLine();
                     	dicc.remove (tModificar);
-                    	dicc.add(new Entrada(tModificar, nuevaDef));
+                    	int conta2 =0;
+                    	conta2= g.getContador()+1;
+                     	dicc.add(new Entrada(tModificar, nuevaDef,conta2));
+                    	contadorGlobal++;
                     	break;
                     	
+                   
+                    case 7:
+                    	System.out.println("Término a buscar: ");
+                    	String tBuscar2 = sc.nextLine();
+                    	Entrada t = dicc.get(tBuscar2);
+                    	System.out.println("Contador de usos de " + tBuscar2+ ":"+t.getContador());
+                    	System.out.println("Frecuencia de usos de " +tBuscar2+ ": "+contadorGlobal/t.getContador());
+                    	break;
 
                     case 0:
                         System.out.println("Saliendo");
@@ -83,4 +105,3 @@ public class Main {
         sc.close();
     }
 }
-
