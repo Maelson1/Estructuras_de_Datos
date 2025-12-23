@@ -1,35 +1,41 @@
 package Proyecto;
 
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
+import java.util.Scanner;
 
 import graphsDSESIUCLM.Graph;
 import graphsDSESIUCLM.TreeMapGraph;
 import graphsDSESIUCLM.Vertex;
+
 public class main {
 
     public static void main(String[] args) {
 
-    	Graph<DecoratedElement<String>, Interaction<Integer>> g = new TreeMapGraph< DecoratedElement<String>, Interaction<Integer>>();
-		
-		
-    	Map<String, DecoratedElement<String>> vertices = new HashMap<>();
+        Graph<DecoratedElement<String>, Interaction<Integer>> g =
+                new TreeMapGraph<>();
 
-    	lecturadearchivos.leerArchivoVertices(g, vertices);
-    	lecturadearchivos.leerArchivoAristas(g, vertices);
+        lecturadearchivos.createGraphFromFiles(g);
 
-    	System.out.println("Grafo creado");
-    	System.out.println("Comprobando grafo...");
+       
+        Iterator<Vertex<DecoratedElement<String>>> it = g.getVertices();
 
-    	Iterator<Vertex<DecoratedElement<String>>> it = g.getVertices();
+        if (it.hasNext()) {
+            System.out.println("El grafo se ha creado correctamente");
+        } else {
+            System.out.println("El grafo está vacío");
+        }
+        
+        AnalizarGrafo.analizarGrafo(g);
+        Scanner sc = new Scanner(System.in);
 
-    	if (it.hasNext()) {
-    	    System.out.println(" El grafo se ha creado correctamente");
-    	} else {
-    	    System.out.println("El grafo está vacío");
-    	}
+        System.out.print("Introduce personaje origen: ");
+        String origen = sc.nextLine();
+
+        System.out.print("Introduce personaje destino: ");
+        String destino = sc.nextLine();
+
+        caminomascorto.caminoMasCorto(g, origen, destino);
 
 
     }
-    }
+}
